@@ -5,11 +5,13 @@
 	"license": "MIT",
 	"repository": "forivall/generate-github-markdown-css-dark",
 	"funding": "https://github.com/sponsors/sindresorhus",
-	"contributors": [{
-		"name": "Sindre Sorhus",
-		"email": "sindresorhus@gmail.com",
-		"url": "https://sindresorhus.com"
-	}],
+	"contributors": [
+		{
+			"name": "Sindre Sorhus",
+			"email": "sindresorhus@gmail.com",
+			"url": "https://sindresorhus.com"
+		}
+	],
 	"author": {
 		"name": "Emily M Klassen",
 		"email": "forivall@users.noreply.github.com",
