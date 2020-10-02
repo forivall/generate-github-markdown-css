@@ -1,12 +1,15 @@
 'use strict';
 const fs = require('fs');
 const path = require('path');
+/** @type {typeof import('got').default} */
 const got = require('got');
 const cheerio = require('cheerio');
 const uncss = require('uncss');
 const pify = require('pify');
 
 const uncssP = pify(uncss);
+
+const extractUserstyle = require('./extract-userstyle');
 
 const manuallyAddedStyle = `
 .markdown-body .octicon {
@@ -95,11 +98,26 @@ const getRenderedFixture = async () => {
 		body: JSON.stringify({
 			mode: 'gfm',
 			context: 'sindresorhus/generate-github-markdown-css',
-			text: fs.readFileSync(path.join(__dirname, 'fixture.md'), 'utf8')
+			text: await fs.promises.readFile(
+				path.join(__dirname, 'fixture.md'),
+				'utf8'
+			)
 		})
 	});
 
 	return `<div class="markdown-body">\n${body}\n</div>`;
+};
+
+/** @param uriOrFilepath {string} */
+const getUserStyle = async uriOrFilepath => {
+	let src;
+	try {
+		src = (await got.get(uriOrFilepath)).body;
+	} catch (_) {
+		src = await fs.promises.readFile(uriOrFilepath);
+	}
+
+	return extractUserstyle.process(src);
 };
 
 const cleanupCss = str => {
@@ -165,17 +183,17 @@ const cleanupCss = str => {
 	return css.stringify(style);
 };
 
-module.exports = async () => {
-	const [fixture, cssString] = await Promise.all([
+module.exports = async ({darkStyle}) => {
+	const [fixture, cssString, darkCssRaw] = await Promise.all([
 		getRenderedFixture(),
-		getCSS()
+		getCSS(),
+		darkStyle && getUserStyle(darkStyle)
 	]);
 
 	const css = await uncssP(fixture, {
 		stylesheets: cssString,
-		ignore: [
-			/^\.pl|^\.tab-size/
-		]
+		raw: darkCssRaw.css,
+		ignore: [/^\.pl|^\.tab-size/]
 	});
 
 	return manuallyAddedStyle + cleanupCss(css);

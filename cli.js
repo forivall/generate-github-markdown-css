@@ -3,11 +3,13 @@
 const meow = require('meow');
 const githubMarkdownCss = require('.');
 
-meow(`
+const cli = meow(`
 	Usage
-	  github-markdown-css > <filename>
+		github-markdown-css-dark [my-dark-theme.user.css] > <filename>
+
+	Dark theme user.css can be a local file or url.
 `);
 
 (async () => {
-	console.log(await githubMarkdownCss());
+	console.log(await githubMarkdownCss({darkStyle: cli.input[0]}));
 })();

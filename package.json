@@ -1,17 +1,22 @@
 {
-	"name": "generate-github-markdown-css",
-	"version": "4.0.0",
-	"description": "Generate the CSS for github-markdown-css",
+	"name": "generate-github-markdown-css-dark",
+	"version": "1.0.0",
+	"description": "Generate the CSS for a dark theme for github-markdown-css",
 	"license": "MIT",
-	"repository": "sindresorhus/generate-github-markdown-css",
+	"repository": "forivall/generate-github-markdown-css-dark",
 	"funding": "https://github.com/sponsors/sindresorhus",
-	"author": {
+	"contributors": [{
 		"name": "Sindre Sorhus",
 		"email": "sindresorhus@gmail.com",
 		"url": "https://sindresorhus.com"
+	}],
+	"author": {
+		"name": "Emily M Klassen",
+		"email": "forivall@users.noreply.github.com",
+		"url": "http://forivall.com"
 	},
 	"bin": {
-		"github-markdown-css": "cli.js"
+		"github-markdown-css-dark": "cli.js"
 	},
 	"engines": {
 		"node": ">=10"
@@ -22,7 +27,8 @@
 	"files": [
 		"index.js",
 		"cli.js",
-		"fixture.md"
+		"fixture.md",
+		"extract-userstyle.js"
 	],
 	"keywords": [
 		"cli-app",
@@ -40,6 +46,7 @@
 		"got": "^10.6.0",
 		"meow": "^6.0.1",
 		"pify": "^5.0.0",
+		"postcss": "^8.1.1",
 		"uncss": "^0.17.3"
 	},
 	"devDependencies": {
