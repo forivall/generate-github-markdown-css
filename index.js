@@ -192,7 +192,7 @@ module.exports = async ({darkStyle} = {}) => {
 
 	const css = await uncssP(fixture, {
 		stylesheets: cssString,
-		raw: darkCssRaw.css,
+		raw: darkCssRaw && darkCssRaw.css,
 		ignore: [/^\.pl|^\.tab-size/]
 	});
 
