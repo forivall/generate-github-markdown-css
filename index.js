@@ -183,7 +183,7 @@ const cleanupCss = str => {
 	return css.stringify(style);
 };
 
-module.exports = async ({darkStyle}) => {
+module.exports = async ({darkStyle} = {}) => {
 	const [fixture, cssString, darkCssRaw] = await Promise.all([
 		getRenderedFixture(),
 		getCSS(),
