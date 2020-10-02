@@ -1,6 +1,6 @@
 {
 	"name": "generate-github-markdown-css-dark",
-	"version": "0.0.0",
+	"version": "1.0.0",
 	"description": "Generate the CSS for a dark theme for github-markdown-css",
 	"license": "MIT",
 	"repository": "forivall/generate-github-markdown-css-dark",
